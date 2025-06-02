@@ -1,4 +1,4 @@
-# Brain Agriculture - Sistema de Gestão Rural
+# Smart Agriculture  - Sistema de Gestão Rural
 
 Sistema backend completo desenvolvido em NestJS para gestão de produtores rurais, fazendas e culturas.
 
