@@ -1,0 +1,115 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum BrazilianStates {
+  AC // Acre
+  AL // Alagoas
+  AP // Amapá
+  AM // Amazonas
+  BA // Bahia
+  CE // Ceará
+  DF // Distrito Federal
+  ES // Espírito Santo
+  GO // Goiás
+  MA // Maranhão
+  MT // Mato Grosso
+  MS // Mato Grosso do Sul
+  MG // Minas Gerais
+  PA // Pará
+  PB // Paraíba
+  PR // Paraná
+  PE // Pernambuco
+  PI // Piauí
+  RJ // Rio de Janeiro
+  RN // Rio Grande do Norte
+  RS // Rio Grande do Sul
+  RO // Rondônia
+  RR // Roraima
+  SC // Santa Catarina
+  SP // São Paulo
+  SE // Sergipe
+  TO // Tocantins
+}
+
+model Producer {
+  id        String   @id @default(uuid())
+  document  String   @unique
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relacionamentos
+  farms Farm[]
+
+  @@map("producers")
+}
+
+model Farm {
+  id             String         @id @default(uuid())
+  producerId     String
+  name           String
+  city           String
+  state          BrazilianStates
+  totalArea      Decimal
+  arableArea     Decimal
+  vegetationArea Decimal
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  // Relacionamentos
+  producer     Producer     @relation(fields: [producerId], references: [id], onDelete: Cascade)
+  farmCultures FarmCulture[]
+
+  @@map("farms")
+}
+
+model Harvest {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  year      Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relacionamentos
+  farmCultures FarmCulture[]
+
+  @@map("harvests")
+}
+
+model Culture {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relacionamentos
+  farmCultures FarmCulture[]
+
+  @@map("cultures")
+}
+
+model FarmCulture {
+  id        String   @id @default(uuid())
+  farmId    String
+  cultureId String
+  harvestId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relacionamentos
+  farm    Farm    @relation(fields: [farmId], references: [id], onDelete: Cascade)
+  culture Culture @relation(fields: [cultureId], references: [id], onDelete: Cascade)
+  harvest Harvest @relation(fields: [harvestId], references: [id], onDelete: Cascade)
+
+  @@unique([farmId, cultureId, harvestId])
+  @@map("farm_cultures")
+} 
