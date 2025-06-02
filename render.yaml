@@ -9,9 +9,9 @@ services:
   # API NestJS
   - type: web
     name: brain-agriculture-api
-    env: node
+    runtime: node
     plan: free
-    buildCommand: npm ci && npm run prisma:generate && npm run build
+    buildCommand: npm ci && npm run prisma:generate && npx nest build
     startCommand: npm run prisma:migrate:deploy && npm run start:prod
     envVars:
       - key: NODE_ENV
