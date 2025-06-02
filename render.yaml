@@ -1,0 +1,29 @@
+services:
+  # Banco PostgreSQL
+  - type: pserv
+    name: brain-agriculture-db
+    databaseName: brain_agriculture
+    user: brain_agriculture_user
+    plan: free
+
+  # API NestJS
+  - type: web
+    name: brain-agriculture-api
+    env: node
+    plan: free
+    buildCommand: npm ci && npm run prisma:generate && npm run build
+    startCommand: npm run prisma:migrate:deploy && npm run start:prod
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: API_PREFIX
+        value: api/v1
+      - key: CORS_ORIGIN
+        value: "*"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: brain-agriculture-db
+          property: connectionString
+    healthCheckPath: /api/v1/health 
