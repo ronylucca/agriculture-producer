@@ -2,6 +2,25 @@
 
 Sistema backend completo desenvolvido em NestJS para gestão de produtores rurais, fazendas e culturas.
 
+## ⚡ Início Rápido
+
+```bash
+# 1. Clone o projeto
+git clone <repository-url>
+cd brain-agriculture-nestjs
+
+# 2. Execute o setup automático
+chmod +x scripts/setup.sh && ./scripts/setup.sh
+
+# 3. Inicie a aplicação
+npm run start:dev
+
+# 4. Acesse a documentação
+# http://localhost:3000/api/v1/docs
+```
+
+🎉 **Pronto!** Sua aplicação estará rodando com banco configurado e dados de exemplo.
+
 ## 🚀 Tecnologias
 
 - **Framework**: NestJS
@@ -44,7 +63,34 @@ git clone <repository-url>
 cd brain-agriculture-nestjs
 ```
 
-### 2. Configuração do ambiente
+### 🌟 2. Setup Automático (Recomendado)
+
+**A maneira mais fácil e rápida de configurar e executar a aplicação:**
+
+```bash
+# Torna o script executável
+chmod +x scripts/setup.sh
+
+# Executa o setup completo
+./scripts/setup.sh
+
+# Inicia a aplicação
+npm run start:dev
+```
+
+O script `setup.sh` faz automaticamente:
+- ✅ Cria o arquivo `.env` baseado no template
+- ✅ Verifica se o Docker está rodando
+- ✅ Inicia o container PostgreSQL
+- ✅ Instala todas as dependências
+- ✅ Gera o cliente Prisma
+- ✅ Executa as migrações do banco
+- ✅ Popula o banco com dados de exemplo
+- ✅ Deixa tudo pronto para desenvolvimento
+
+### 3. Configuração Manual (Alternativa)
+
+#### 3.1. Configuração do ambiente
 ```bash
 # Copie o arquivo de exemplo
 cp env.example .env
@@ -52,7 +98,7 @@ cp env.example .env
 # Configure as variáveis de ambiente conforme necessário
 ```
 
-### 3. Desenvolvimento com Docker
+#### 3.2. Desenvolvimento com Docker
 ```bash
 # Subir aplicação em modo desenvolvimento
 docker-compose -f docker-compose.dev.yml up -d
@@ -61,7 +107,7 @@ docker-compose -f docker-compose.dev.yml up -d
 docker-compose -f docker-compose.dev.yml logs -f app
 ```
 
-### 4. Desenvolvimento local
+#### 3.3. Desenvolvimento local
 ```bash
 # Instalar dependências
 npm install
@@ -173,6 +219,9 @@ npm run test:cov
 ## 📖 Scripts Disponíveis
 
 ```bash
+# Setup inicial (recomendado para primeira execução)
+./scripts/setup.sh           # Setup completo automatizado
+
 # Desenvolvimento
 npm run start:dev          # Modo desenvolvimento com watch
 npm run start:debug        # Modo debug
