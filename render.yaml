@@ -1,11 +1,11 @@
-services:
-  # Banco PostgreSQL
-  - type: pserv
-    name: brain-agriculture-db
+# Banco PostgreSQL deve estar na seção 'databases', não 'services'
+databases:
+  - name: brain-agriculture-db
     databaseName: brain_agriculture
     user: brain_agriculture_user
     plan: free
 
+services:
   # API NestJS
   - type: web
     name: brain-agriculture-api
