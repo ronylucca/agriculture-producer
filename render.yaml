@@ -1,4 +1,3 @@
-# Banco PostgreSQL deve estar na seção 'databases', não 'services'
 databases:
   - name: brain-agriculture-db
     databaseName: brain_agriculture
@@ -12,7 +11,7 @@ services:
     runtime: node
     plan: free
     buildCommand: npm ci && npm run prisma:generate && npx nest build
-    startCommand: npm run prisma:migrate:deploy && npm run start:prod
+    startCommand: npm run prisma:migrate:deploy && npm run prisma:seed && npm run start:prod
     envVars:
       - key: NODE_ENV
         value: production
@@ -26,4 +25,4 @@ services:
         fromDatabase:
           name: brain-agriculture-db
           property: connectionString
-    healthCheckPath: /api/v1/health 
+    healthCheckPath: /api/v1/health
