@@ -88,58 +88,6 @@ O script `setup.sh` faz automaticamente:
 - ✅ Popula o banco com dados de exemplo
 - ✅ Deixa tudo pronto para desenvolvimento
 
-### 3. Configuração Manual (Alternativa)
-
-#### 3.1. Configuração do ambiente
-```bash
-# Copie o arquivo de exemplo
-cp env.example .env
-
-# Configure as variáveis de ambiente conforme necessário
-```
-
-#### 3.2. Desenvolvimento com Docker
-```bash
-# Subir aplicação em modo desenvolvimento
-docker-compose -f docker-compose.dev.yml up -d
-
-# Ver logs
-docker-compose -f docker-compose.dev.yml logs -f app
-```
-
-#### 3.3. Desenvolvimento local
-```bash
-# Instalar dependências
-npm install
-
-# Subir apenas o PostgreSQL
-docker-compose up postgres -d
-
-# Gerar cliente Prisma
-npm run prisma:generate
-
-# Executar migrações
-npm run prisma:migrate
-
-# Semear dados iniciais (opcional)
-npm run prisma:seed
-
-# Iniciar em modo desenvolvimento
-npm run start:dev
-```
-
-## 🐳 Docker
-
-### Desenvolvimento
-```bash
-docker-compose -f docker-compose.dev.yml up -d
-```
-
-### Produção
-```bash
-docker-compose up -d
-```
-
 ## 📚 API Documentation
 
 Após iniciar a aplicação, acesse:
@@ -216,54 +164,6 @@ npm run test:e2e
 npm run test:cov
 ```
 
-## 📖 Scripts Disponíveis
-
-```bash
-# Setup inicial (recomendado para primeira execução)
-./scripts/setup.sh           # Setup completo automatizado
-
-# Desenvolvimento
-npm run start:dev          # Modo desenvolvimento com watch
-npm run start:debug        # Modo debug
-
-# Build e Produção
-npm run build              # Build da aplicação
-npm run start:prod         # Produção
-
-# Database
-npm run prisma:generate    # Gerar cliente Prisma
-npm run prisma:migrate     # Executar migrações
-npm run prisma:seed        # Semear dados iniciais
-npm run prisma:studio      # Interface visual do banco
-
-# Qualidade de código
-npm run lint               # ESLint
-npm run format             # Prettier
-```
-
-## 🗃️ Estrutura do Projeto
-
-```
-src/
-├── modules/
-│   ├── health/           # Módulo de health check
-│   ├── producers/        # Módulo de produtores
-│   ├── farms/           # Módulo de fazendas
-│   ├── cultures/        # Módulo de culturas
-│   ├── harvests/        # Módulo de safras
-│   ├── farm-cultures/   # Módulo de culturas por fazenda
-│   └── dashboard/       # Módulo de dashboard
-├── common/
-│   ├── decorators/      # Decorators customizados
-│   ├── filters/         # Filtros de exceção
-│   ├── guards/          # Guards de autenticação
-│   ├── interceptors/    # Interceptors
-│   ├── validators/      # Validadores customizados
-│   └── enums/          # Enums
-├── database/
-│   └── prisma/         # Configuração do Prisma
-└── config/             # Configurações da aplicação
-```
 
 ## 🔒 Validações
 
@@ -385,7 +285,3 @@ As validações customizadas estão em `src/common/validators/`:
 ## 📝 Licença
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
-## 📞 Suporte
-
-Para suporte, entre em contato através do email: suporte@brainagriculture.com 
