@@ -20,7 +20,7 @@ fi
 
 echo ""
 echo "🐳 Iniciando containers..."
-docker-compose up -d postgres
+docker compose up -d postgres
 
 echo ""
 echo "⏳ Aguardando PostgreSQL inicializar..."

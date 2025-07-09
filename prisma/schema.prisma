@@ -48,7 +48,7 @@ model Producer {
   updatedAt DateTime @updatedAt
 
   // Relacionamentos
-  farms Farm[]
+  farms Farm[] // Um produtor tem várias fazendas
 
   @@map("producers")
 }
@@ -67,7 +67,7 @@ model Farm {
 
   // Relacionamentos
   producer     Producer     @relation(fields: [producerId], references: [id], onDelete: Cascade)
-  farmCultures FarmCulture[]
+  farmCultures FarmCulture[]  // Uma fazenda cultiva várias culturas
 
   @@map("farms")
 }
@@ -110,6 +110,6 @@ model FarmCulture {
   culture Culture @relation(fields: [cultureId], references: [id], onDelete: Cascade)
   harvest Harvest @relation(fields: [harvestId], references: [id], onDelete: Cascade)
 
-  @@unique([farmId, cultureId, harvestId])
+  @@unique([farmId, cultureId, harvestId]) // Evita duplicatas
   @@map("farm_cultures")
 } 
